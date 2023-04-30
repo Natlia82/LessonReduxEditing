@@ -1,9 +1,11 @@
 import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {removeService} from '../redux/actionCreators';
 
 function ServiceList() {
-    const items = [{id: 1, name: 'Замена стекла', price: "21000"},
-               {id: 2, name: 'Замена дисплея', price: "25000"}];
-    const handleRemove = id => {};
+    const items = useSelector(state => state.serviceList);
+    const dispatch = useDispatch();
+    const handleRemove = id => {dispatch(removeService(id)) };
     return (
         <ul>
             {items.map(o => (
