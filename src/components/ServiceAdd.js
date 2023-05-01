@@ -1,27 +1,35 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {changeServiceField, addService, removeService} from '../redux/actionCreators';
+import {changeServiceField, addService, removeService, changeServiceCansel, updateService} from '../redux/actionCreators';
 
 
 function ServiceAdd() {
     const item = useSelector(state => state.serviceAdd);
-    console.log(item)
+  //  console.log(item)
     const dispatch = useDispatch();
     const handleChange = evt => { const {name, value} = evt.target; 
-                                 // console.log("_______")
-                                 // console.log(value);
                                   dispatch(changeServiceField(name, value));    
                                 }
     const handleSubmit = evt => { evt.preventDefault(); 
-                                  const {name} = evt.target.name.value; 
-                                 // console.log(name);
-                                  dispatch(addService(item.name, item.price));
+                                  if (item.id == 0) {
+                                    dispatch(addService(item.name, item.price));
+                                    dispatch(changeServiceCansel());   
+                                  } else {
+                                    console.log(item.id);
+                                    dispatch(updateService(item.id, item.name, item.price));
+                                    dispatch(changeServiceCansel());
+                                  }
+                                  
                                 }
+    const clickCansel = evt => {
+                                  dispatch(changeServiceCansel()); 
+                               }                                
     return (
         <form onSubmit={handleSubmit}>
             <input name='name' onChange={handleChange} value={item.name} />
             <input name='price' onChange={handleChange} value={item.price}/>
             <button type='submit'>Save</button>
+            {item.id==0?"":<button type='button' onClick={clickCansel}>Cansel</button>}
         </form>
     );
 }
