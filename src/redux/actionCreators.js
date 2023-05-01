@@ -21,6 +21,5 @@ export function changeServiceCansel() {
 }
 
 export function updateService(kod, nameNew, priceNew) {
-    console.log("пришел код " + kod)
     return { type: UPDATE_SERVICE, payload: { kod, nameNew, priceNew } }
 }

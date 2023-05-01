@@ -15,7 +15,6 @@ function ServiceAdd() {
                                     dispatch(addService(item.name, item.price));
                                     dispatch(changeServiceCansel());   
                                   } else {
-                                    console.log(item.id);
                                     dispatch(updateService(item.id, item.name, item.price));
                                     dispatch(changeServiceCansel());
                                   }

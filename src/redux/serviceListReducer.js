@@ -15,7 +15,6 @@ export default function serviceListReducer(state = initialState, action) {
             const { id } = action.payload;
             return state.filter(service => service.id !== id);
         case UPDATE_SERVICE:
-            console.log("________")
             const { kod, nameNew, priceNew } = action.payload;
             return state.map(item => item.id === kod ? { id: kod, name: nameNew, price: priceNew } : {...item });
         default:
